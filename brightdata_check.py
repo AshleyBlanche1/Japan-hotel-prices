@@ -5,8 +5,9 @@ GitHub Actions with the key stored as the repository secret BRIGHTDATA_KEY (and 
 name as BRIGHTDATA_ZONE, default "serp_api1"); neither is written to any file.
 
 For every one of the 21 hotel options, every day, it asks Google Hotels for the exact stay
-and party (2 adults + 1 child aged 10, GBP) twice: free-cancellation offers only, and all
-offers. That is 42 requests a day (about 1,300 a month, inside the free 5,000).
+and party (2 adults + 1 child aged 10, GBP), free-cancellation offers only. That is 21
+requests a day (about 650 a month, inside the free 5,000). Each request waits at most 45
+seconds, results are saved after every hotel, and it stops after 3 failures in a row.
 
 It needs each hotel's Google id, which serpapi_check.py saves in data/serpapi_tokens.json.
 Writes data/brightdata_latest.json (today's results) and data/brightdata_sample.json (one
@@ -35,7 +36,7 @@ def to_number(v):
     if isinstance(v, (int, float)):
         return float(v)
     if isinstance(v, str):
-        m = re.search(r"([\d,]+(?:\.\d+)?)", v.replace("\u00a0", " "))
+        m = re.search(r"([\d,]+(?:\.\d+)?)", v.replace(" ", " "))
         if m and ("£" in v or "GBP" in v or re.fullmatch(r"[\d,.\s]+", v.strip())):
             return float(m.group(1).replace(",", ""))
     return None
@@ -80,7 +81,7 @@ def fetch(key, zone, name, token, ci, co, free_only):
            f"?brd_dates={ci}%2C{co}&brd_occupancy=2%2C10&brd_currency=GBP"
            f"&brd_free_cancellation={'true' if free_only else 'false'}&brd_json=1&gl=uk&hl=en")
     r = requests.post(API, headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                      json={"zone": zone, "url": url, "format": "raw"}, timeout=120)
+                      json={"zone": zone, "url": url, "format": "raw"}, timeout=45)
     r.raise_for_status()
     try:
         return r.json()
@@ -108,43 +109,49 @@ def main():
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     tokens = json.load(open(TOKENS_FILE)) if os.path.exists(TOKENS_FILE) else {}
     results, sample = [], None
+    os.makedirs("data", exist_ok=True)
+    failures_in_a_row = 0
+
+    def save():
+        json.dump({"date": today, "checked_at": now, "results": results}, open("data/brightdata_latest.json", "w"), indent=1)
+        if sample:
+            json.dump(sample, open("data/brightdata_sample.json", "w"), indent=1)
+
     for oid, name, ci, co, nights in HOTELS:
         row = {"date": today, "option_id": oid, "site": SITE, "checked_at": now}
         token = tokens.get(name)
-        if not token:
+        if failures_in_a_row >= 3:
+            row["status"] = "skipped: Bright Data failed 3 times in a row this run"
+        elif not token:
             row["status"] = "waiting for Google hotel id (run the SerpApi check once by hand)"
-            results.append(row)
-            continue
-        try:
-            free_data = fetch(key, zone, name, token, ci, co, True)
-            any_data = fetch(key, zone, name, token, ci, co, False)
-            if sample is None:
-                sample = {"hotel": name, "top_level_keys": sorted(free_data.keys())[:40] if isinstance(free_data, dict) else str(type(free_data)),
-                          "offers_found": offers_in(free_data)[:8], "trimmed": json.dumps(free_data)[:6000]}
-            free_offers, any_offers = offers_in(free_data), offers_in(any_data)
-            b_free, b_any = best(free_offers, nights, True), best(any_offers, nights, True)
-            c_free = best(free_offers, nights, False)
-            row.update({
-                "price_gbp": b_free["total"] if b_free else None,          # Booking.com, free cancellation
-                "price_any_gbp": b_any["total"] if b_any else None,        # Booking.com, any terms
-                "cheapest_site": c_free["site"] if c_free else None,       # any site, free cancellation
-                "cheapest_stay_gbp": c_free["total"] if c_free else None,
-                "price_basis": (b_free or b_any or c_free or {}).get("how"),
-                "offers_seen": len(any_offers),
-                "status": "ok" if b_free else ("Booking.com non-refundable only" if b_any else ("no Booking.com offer" if any_offers else "no offers found")),
-            })
-        except Exception as e:  # error text never includes the key
-            row["status"] = f"error: {type(e).__name__}: {str(e).replace(key, '***')[:150]}"
+        else:
+            started = time.time()
+            try:
+                data = fetch(key, zone, name, token, ci, co, True)  # free-cancellation offers only
+                if sample is None:
+                    sample = {"hotel": name, "top_level_keys": sorted(data.keys())[:40] if isinstance(data, dict) else str(type(data)),
+                              "offers_found": offers_in(data)[:8], "trimmed": json.dumps(data)[:6000]}
+                offers = offers_in(data)
+                b, c = best(offers, nights, True), best(offers, nights, False)
+                row.update({
+                    "price_gbp": b["total"] if b else None,                # Booking.com, free cancellation
+                    "cheapest_site": c["site"] if c else None,             # any site, free cancellation
+                    "cheapest_stay_gbp": c["total"] if c else None,
+                    "price_basis": (b or c or {}).get("how"),
+                    "offers_seen": len(offers),
+                    "status": "ok" if b else ("no Booking.com offer" if offers else "no offers found"),
+                })
+                failures_in_a_row = 0
+            except Exception as e:  # error text never includes the key
+                row["status"] = f"error: {type(e).__name__}: {str(e).replace(key, '***')[:150]}"
+                failures_in_a_row += 1
+            row["seconds"] = round(time.time() - started, 1)
         results.append(row)
-        print(oid, row["status"], row.get("price_gbp"), row.get("price_any_gbp"))
-        time.sleep(1)
-    os.makedirs("data", exist_ok=True)
-    json.dump({"date": today, "checked_at": now, "results": results}, open("data/brightdata_latest.json", "w"), indent=1)
-    if sample:
-        json.dump(sample, open("data/brightdata_sample.json", "w"), indent=1)
+        save()  # keep what we have, even if the run is stopped part-way
+        print(oid, row["status"], row.get("price_gbp"), row.get("seconds"), flush=True)
     with open("data/brightdata_prices.jsonl", "a") as f:
         for r in results:
-            if r.get("price_gbp") is not None or r.get("price_any_gbp") is not None:
+            if r.get("price_gbp") is not None:
                 f.write(json.dumps(r) + "\n")
     print(sum(1 for r in results if r.get("price_gbp") is not None), "of", len(results), "priced with free cancellation")
 

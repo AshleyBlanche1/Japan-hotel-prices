@@ -127,6 +127,11 @@ def main():
         print("Not a check day (every third day); nothing to do. Next check in", 3 - today.toordinal() % 3, "day(s).")
         return
     todays = HOTELS
+    if manual and os.path.exists("data/serpapi_latest.json"):
+        prev = json.load(open("data/serpapi_latest.json"))
+        if prev.get("date") == today.isoformat() and sum(1 for r in prev.get("results", []) if r.get("price_gbp") is not None) >= len(HOTELS):
+            print("All hotels already checked today; skipping to save free searches.")
+            return
     os.makedirs("data", exist_ok=True)
     tokens = json.load(open(TOKENS_FILE)) if os.path.exists(TOKENS_FILE) else {}
     results = []
