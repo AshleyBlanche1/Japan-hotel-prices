@@ -1,0 +1,32 @@
+name: Daily Booking.com price check
+
+on:
+  schedule:
+    - cron: "23 6 * * *"   # 06:23 UTC every day
+  workflow_dispatch:        # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tests/test_parse.py
+      - name: Scrape Booking.com
+        env:
+          PROXY_URL: ${{ secrets.PROXY_URL }}   # optional; leave unset for free
+        run: python scraper.py
+      - name: Save results
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Prices $(date -u +%F)"
+          git push
