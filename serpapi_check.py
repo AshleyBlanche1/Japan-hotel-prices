@@ -1,9 +1,9 @@
 """Daily accurate price check for the Japan 2027 trip using SerpApi's Google Hotels API.
 
 Official API, no scraping. Runs on GitHub Actions with the key stored as the repository
-secret SERPAPI_KEY (never written to any file). Checks 7 of the 21 hotel options each
-day in rotation, so every option gets a fresh price every third day (about 210 searches a
-month, inside SerpApi's free 250). Party: 2 adults + 1 child aged 10, prices in GBP.
+secret SERPAPI_KEY (never written to any file). Checks all 21 hotel options together
+every third day (about 210 searches a month, inside SerpApi's free 250), and every time
+the workflow is started by hand from the Actions tab. Party: 2 adults + 1 child aged 10, prices in GBP.
 
 Writes data/serpapi_latest.json (today's results) and appends priced rows to
 data/serpapi_prices.jsonl. Never estimates: a hotel with no price is saved with a status.
@@ -120,8 +120,13 @@ def main():
         raise SystemExit("SERPAPI_KEY secret is missing")
     today = datetime.now(ZoneInfo("Europe/London")).date()
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    group = today.toordinal() % 3
-    todays = [h for i, h in enumerate(HOTELS) if i % 3 == group]
+    # All 21 hotels together. Scheduled runs check every third day (about 210 searches a
+    # month, inside the free 250); a run started by hand from the Actions tab always checks.
+    manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+    if not manual and today.toordinal() % 3 != 0:
+        print("Not a check day (every third day); nothing to do. Next check in", 3 - today.toordinal() % 3, "day(s).")
+        return
+    todays = HOTELS
     os.makedirs("data", exist_ok=True)
     tokens = json.load(open(TOKENS_FILE)) if os.path.exists(TOKENS_FILE) else {}
     results = []
