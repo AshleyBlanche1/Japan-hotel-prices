@@ -1,0 +1,153 @@
+{
+ "date": "2026-11-01",
+ "checked_at": "2026-11-01T12:58:46Z",
+ "results": [
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-1-hotel-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-jw-marriott-hotel-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-hotel-toranomon-hills",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-the-prince-sakura-tower-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-ana-intercontinental-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-the-prince-park-tower-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-1-grand-prince-hotel-shin-takanawa",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "osaka-the-osaka-station-hotel",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "osaka-the-gate-hotel-osaka-by-hulic",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "osaka-rihga-royal-hotel-osaka",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "osaka-the-royal-park-hotel-iconic-osaka-midosuji",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "kyoto-dusit-thani-kyoto",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "kyoto-hotel-the-celestine-kyoto-gion",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "kyoto-the-thousand-kyoto",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "kyoto-hilton-kyoto",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-jw-marriott-hotel-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-gajoen-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-the-prince-sakura-tower-tokyo",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-grand-prince-hotel-takanawa",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-intercontinental-tokyo-bay",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  },
+  {
+   "date": "2026-11-01",
+   "option_id": "tokyo-2-grand-prince-hotel-shin-takanawa",
+   "site": "Booking.com (GitHub scraper)",
+   "checked_at": "2026-11-01T12:58:46Z",
+   "status": "no room table"
+  }
+ ]
+}
