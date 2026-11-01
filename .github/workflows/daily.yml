@@ -23,14 +23,16 @@ jobs:
         continue-on-error: true
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-        run: python serpapi_check.py
+        run: python -u serpapi_check.py
       - name: Google Hotels prices (Bright Data, daily)
         continue-on-error: true
+        timeout-minutes: 15
         env:
           BRIGHTDATA_KEY: ${{ secrets.BRIGHTDATA_KEY }}
           BRIGHTDATA_ZONE: ${{ secrets.BRIGHTDATA_ZONE }}
-        run: python brightdata_check.py
+        run: python -u brightdata_check.py
       - name: Save results
+        if: always()
         run: |
           git config user.name "price-bot"
           git config user.email "price-bot@users.noreply.github.com"
