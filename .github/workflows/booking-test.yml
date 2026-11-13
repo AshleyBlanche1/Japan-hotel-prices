@@ -42,7 +42,7 @@ jobs:
           ALL: ${{ github.event_name == 'schedule' || inputs.all }}
         run: |
           set -o pipefail
-          if [ "$ALL" = "true" ]; then ARGS=""; else ARGS="--hotels 3 --diagnose"; fi
+          if [ "$ALL" = "true" ]; then ARGS="--diagnose"; else ARGS="--hotels 3 --diagnose"; fi
           echo "run started $(date -u +%FT%TZ) on GitHub-hosted ubuntu-latest, event=${{ github.event_name }}, args='$ARGS'" | tee booking-test.log
           python -u booking_check.py $ARGS --out booking-test.json 2>&1 | tee -a booking-test.log
       - name: Results table
