@@ -1,0 +1,76 @@
+name: Booking.com reachability test
+
+# Can an ordinary request from GitHub Actions read Booking.com prices?
+# Run by hand from the Actions tab: first with "all" unticked (three test options,
+# full response bodies logged), then with "all" ticked (all 21 options).
+# The temporary schedule adds unattended 21-option runs at the time the daily check will
+# use (06:37 UTC) and in the afternoon; remove it once docs/github-actions-test.md is done.
+# Commits nothing: the log and the JSON results are saved as an artifact, and a results
+# table is shown on the run's summary page.
+
+on:
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "Check all 21 options (unticked = 3 test options with full response bodies)"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "37 6 * * *"
+    - cron: "7 13 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: booking
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python tests/test_booking.py
+      - name: Ask Booking.com
+        env:
+          ALL: ${{ github.event_name == 'schedule' || inputs.all }}
+        run: |
+          set -o pipefail
+          if [ "$ALL" = "true" ]; then ARGS=""; else ARGS="--hotels 3 --diagnose"; fi
+          echo "run started $(date -u +%FT%TZ) on GitHub-hosted ubuntu-latest, event=${{ github.event_name }}, args='$ARGS'" | tee booking-test.log
+          python -u booking_check.py $ARGS --out booking-test.json 2>&1 | tee -a booking-test.log
+      - name: Results table
+        if: always()
+        run: |
+          python - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json, os, re
+          log = open("booking-test.log").read() if os.path.exists("booking-test.log") else ""
+          codes = re.findall(r"request \d+: HTTP (\d+)", log)
+          print(f"**Requests:** {len(codes)}; HTTP statuses: {sorted(set(codes)) or 'none'}; "
+                f"non-JSON bodies: {log.count('json=False')}; x-amzn-waf-action seen: {'x-amzn-waf-action' in log}\n")
+          if os.path.exists("booking-test.json"):
+              d = json.load(open("booking-test.json"))
+              rs = d["results"]
+              print(f"**{sum(r['status'] in ('ok', 'non-refundable only') for r in rs)} of {len(rs)} priced** "
+                    f"(checked_at {d['checked_at']}, runner {d['runner']})\n")
+              print("| option | status | price_gbp | price_any_gbp | room | taxes incl. |\n|---|---|---|---|---|---|")
+              for r in rs:
+                  print(f"| {r['option_id']} | {r['status']} | {r['price_gbp']} | {r['price_any_gbp']} | {r['room']} | {r['taxes_included']} |")
+          else:
+              print("No results file was written.")
+          EOF
+      - name: Save log and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: booking-test-${{ github.run_number }}-${{ github.run_attempt }}
+          path: |
+            booking-test.log
+            booking-test.json
+          retention-days: 90
