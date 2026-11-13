@@ -1,0 +1,78 @@
+name: Booking.com daily prices
+
+# Daily Booking.com check for all 21 options. Writes data/booking_latest.json (and
+# data/booking_hotel_ids.json if a new hotel id was looked up) and commits it to main.
+# The Claude cloud task reads the file at 08:17 UK time.
+#
+# The run is marked FAILED (GitHub e-mails a failed-run notice) when Booking.com shows a
+# robot check, any option has an "error: ..." status, fewer than 18 of 21 are priced, the
+# script crashes or the push is rejected. "sold out" is not an error. The file is committed
+# before the check, so a bad day is still visible in the data.
+
+on:
+  schedule:
+    - cron: "41 6 * * *"   # 06:41 UTC every day
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: booking
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests==2.32.3
+      - run: python tests/test_booking.py
+      - name: Booking.com prices (all 21 options)
+        run: python -u booking_check.py --write
+      - name: Commit
+        run: |
+          git config user.name "price-bot"
+          git config user.email "price-bot@users.noreply.github.com"
+          git add data/booking_latest.json data/booking_hotel_ids.json
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -m "Booking.com prices $(TZ=Europe/London date +%F)"
+          git pull --rebase origin main
+          git push
+      - name: Flag problems
+        run: |
+          python - <<'EOF'
+          import json, os, sys
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          d = json.load(open("data/booking_latest.json"))
+          rs = d["results"]
+          priced = [r for r in rs if r["status"] in ("ok", "non-refundable only")]
+          bad = [r for r in rs if r["status"] == "robot check" or r["status"].startswith("error")]
+          today = datetime.now(ZoneInfo("Europe/London")).date().isoformat()
+          problems = []
+          if d["date"] != today:
+              problems.append(f"file is dated {d['date']}, not today ({today})")
+          if len(rs) != 21:
+              problems.append(f"{len(rs)} results instead of 21")
+          if any(r["status"] == "robot check" for r in rs):
+              problems.append("Booking.com showed a robot check: the check is blocked from GitHub")
+          if len(priced) < 18:
+              problems.append(f"only {len(priced)} of 21 options priced")
+          for r in bad:
+              if r["status"] != "robot check":
+                  problems.append(f"{r['option_id']}: {r['status']}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write(f"**{len(priced)} of {len(rs)} priced** ({d['date']}, runner {d['runner']})\n\n")
+              f.write("| option | status | price_gbp | price_any_gbp | room |\n|---|---|---|---|---|\n")
+              for r in rs:
+                  f.write(f"| {r['option_id']} | {r['status']} | {r['price_gbp']} | {r['price_any_gbp']} | {r['room']} |\n")
+          for p in problems:
+              print(f"::error::{p}")
+          print(f"{len(priced)} of {len(rs)} priced; {len(problems)} problem(s)")
+          sys.exit(1 if problems else 0)
+          EOF

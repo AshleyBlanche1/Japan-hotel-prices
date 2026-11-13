@@ -3,8 +3,6 @@ name: Booking.com reachability test
 # Can an ordinary request from GitHub Actions read Booking.com prices?
 # Run by hand from the Actions tab: first with "all" unticked (three test options,
 # full response bodies logged), then with "all" ticked (all 21 options).
-# The temporary schedule adds unattended 21-option runs at the time the daily check will
-# use (06:37 UTC) and in the afternoon; remove it once docs/github-actions-test.md is done.
 # Commits nothing: the log and the JSON results are saved as an artifact, and a results
 # table is shown on the run's summary page.
 
@@ -15,9 +13,6 @@ on:
         description: "Check all 21 options (unticked = 3 test options with full response bodies)"
         type: boolean
         default: false
-  schedule:
-    - cron: "37 6 * * *"
-    - cron: "7 13 * * *"
 
 permissions:
   contents: read
@@ -39,7 +34,7 @@ jobs:
       - run: python tests/test_booking.py
       - name: Ask Booking.com
         env:
-          ALL: ${{ github.event_name == 'schedule' || inputs.all }}
+          ALL: ${{ inputs.all }}
         run: |
           set -o pipefail
           if [ "$ALL" = "true" ]; then ARGS="--diagnose"; else ARGS="--hotels 3 --diagnose"; fi
