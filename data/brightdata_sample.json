@@ -1,14 +1,9 @@
 {
  "hotel": "1 Hotel Tokyo",
  "top_level_keys": [
-  "address",
-  "coordinates",
-  "fid",
-  "name",
   "overview",
-  "phone",
   "reviews"
  ],
  "offers_found": [],
- "trimmed": "{\"overview\": {\"type\": \"hotels\", \"title\": \"1 Hotel Tokyo\", \"requested\": {\"start_date\": \"2027-08-08\", \"end_date\": \"2027-08-12\", \"occupancy\": 3, \"number_of_adults\": 2, \"children_ages\": [[10]]}, \"available\": \"unknown\", \"currency\": \"GBP\", \"coordinates\": {\"latitude\": 35.670064599999996, \"longitude\": 139.74049159999998}, \"address\": \"2 Chome-17-22 Akasaka, Minato City, Tokyo 107-0052, Japan\", \"phone\": \"+81 3-6441-3040\", \"fid\": \"0x60188b000bc6fc2b:0x78116ee15aae0613\"}, \"name\": \"1 Hotel Tokyo\", \"coordinates\": [35.670064599999996, 139.74049159999998], \"address\": \"2 Chome-17-22 Akasaka, Minato City, Tokyo 107-0052, Japan\", \"phone\": \"+81 3-6441-3040\", \"fid\": \"0x60188b000bc6fc2b:0x78116ee15aae0613\", \"reviews\": {\"rating\": 4.5, \"reviews_cnt\": 169, \"reviews_by_stars\": {\"5 star\": \"1%\"}}}"
+ "trimmed": "{\"overview\": {\"type\": \"hotels\", \"title\": \"1 Hotel Tokyo - Google hotels\", \"requested\": {\"start_date\": \"2027-08-08\", \"end_date\": \"2027-08-12\", \"occupancy\": 3, \"number_of_adults\": 2, \"children_ages\": [\"10\"]}, \"available\": \"unknown\", \"currency\": \"GBP\"}, \"reviews\": {\"rating\": 4.5, \"reviews_cnt\": 170, \"reviews_by_stars\": {\"5 star\": \"1%\"}}}"
 }
