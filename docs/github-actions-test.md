@@ -61,7 +61,7 @@ so not the same hour):
 **Works from GitHub: daily workflow live** (Ashley's decision on 13 Nov, after the runs above,
 instead of waiting for three 21-option test runs).
 
-`.github/workflows/booking-daily.yml` runs at 06:41 UTC every day (and on demand), writes
+`.github/workflows/booking-daily.yml` runs at 05:30 UTC every day (and on demand), writes
 `data/booking_latest.json` and commits it as `Booking.com prices YYYY-MM-DD`. The run is
 marked **failed**, which makes GitHub send a failed-run notice, when:
 

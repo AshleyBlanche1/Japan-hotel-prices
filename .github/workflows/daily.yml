@@ -2,7 +2,7 @@ name: Daily hotel price check
 
 on:
   schedule:
-    - cron: "23 6 * * *"   # 06:23 UTC every day
+    - cron: "15 5 * * *"   # 05:15 UTC every day
   workflow_dispatch:        # lets you run it by hand from the Actions tab
 
 permissions:

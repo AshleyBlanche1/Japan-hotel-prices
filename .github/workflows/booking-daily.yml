@@ -2,7 +2,7 @@ name: Booking.com daily prices
 
 # Daily Booking.com check for all 21 options. Writes data/booking_latest.json (and
 # data/booking_hotel_ids.json if a new hotel id was looked up) and commits it to main.
-# The Claude cloud task reads the file at 08:17 UK time.
+# A Claude task reads the file at 07:00 UK time (06:00 UTC in summer), so this runs at 05:30 UTC.
 #
 # The run is marked FAILED (GitHub e-mails a failed-run notice) when Booking.com shows a
 # robot check, any option has an "error: ..." status, fewer than 18 of 21 are priced, the
@@ -11,7 +11,7 @@ name: Booking.com daily prices
 
 on:
   schedule:
-    - cron: "41 6 * * *"   # 06:41 UTC every day
+    - cron: "30 5 * * *"   # 05:30 UTC every day
   workflow_dispatch:
 
 permissions:
