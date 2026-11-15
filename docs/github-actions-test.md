@@ -65,7 +65,7 @@ instead of waiting for three 21-option test runs).
 `data/booking_latest.json` and commits it as `Booking.com prices YYYY-MM-DD`. The run is
 marked **failed**, which makes GitHub send a failed-run notice, when:
 
-- Booking.com shows a robot check (HTTP 202, `x-amzn-waf-action`, or a challenge page);
+- Booking.com still shows a robot check after that run's attempts (HTTP 202, `x-amzn-waf-action`, or a challenge page; see the retry rules below);
 - any option has an `error: ...` status (for example a timeout after the one retry);
 - fewer than 18 of 21 options are priced;
 - the file is not dated today or does not have 21 results;
@@ -73,3 +73,34 @@ marked **failed**, which makes GitHub send a failed-run notice, when:
 
 `sold out` and `non-refundable only` are not errors. The file is committed before the check,
 so a bad day is still visible in the data. Each run's summary page shows the 21-row table.
+
+## 15 Nov 2026: first robot check from GitHub, and retries added
+
+| Run (UTC) | Trigger | Requests | Result | Response |
+|---|---|---|---|---|
+| 2026-11-15 13:54 | manual, `booking-daily.yml` | 1 | **robot check**, 0 of 21 priced | HTTP 202, empty body, `server: CloudFront`, `x-amzn-waf-action: challenge`, POP IAD61 (Virginia) |
+| 2026-11-15, shortly after | Mac, 1 option | 1 | priced (JW Marriott £1,806.90) | HTTP 200 JSON, `server: istio-envoy` |
+| 2026-11-15 15:00 | manual, `booking-test.yml`, 3 options | 4 | 3 of 3 priced | HTTP 200 JSON, same POP IAD61 |
+
+The challenge came from the CloudFront edge (AWS WAF), not Booking's own servers. The same
+edge location let a different GitHub server through an hour later, and the Mac was never
+challenged, so this looks like the reputation of that one runner's address (AWS WAF has
+managed rules aimed at cloud-hosting addresses), not a new rule for everyone. Other projects
+report the same 202 + `x-amzn-waf-action: challenge` from GitHub-hosted runners against other
+AWS WAF-protected sites. GitHub runs so far: 5 of 6 succeeded.
+
+Also observed: GitHub starts the scheduled runs very late. The SerpApi run set for 06:23 UTC
+started between 13:21 and 16:41 UTC on each of 7–14 Nov; GitHub does not guarantee start times
+for scheduled workflows.
+
+**Retries (Ashley's decision, 15 Nov), at most three attempts a day:**
+
+1. Morning run (05:30 UTC schedule).
+2. If that is challenged: wait five minutes, then one second attempt on a fresh GitHub server,
+   asking only about the options not yet priced (`--retry-robot-check`).
+3. Evening run (17:30 UTC schedule, `--evening`): does nothing if today's file has no robot
+   check or error; otherwise one more attempt for those options, or a full run if there is no
+   file for today. No five-minute retry in the evening.
+
+After that, nothing more is asked until the next day. Each run ends with one pass/fail result
+(the `report` job), so each run sends one notification.

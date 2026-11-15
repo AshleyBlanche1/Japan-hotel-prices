@@ -5,7 +5,9 @@ docs/booking-endpoints.md). It is a plain HTTPS request with an honest User-Agen
 cookies (none are sent or kept, even within a run), no login, no challenge solving, no
 proxies, no browser impersonation. If Booking.com answers with a challenge, the hotel and
 every remaining one is recorded as "robot check", no further requests are made, and the
-file is still written so the failure is visible.
+file is still written so the failure is visible. The daily workflow then makes one second
+attempt five minutes later (--retry-robot-check), and one evening attempt (--evening) only if
+the day still has no clean result. At most three attempts a day; then it stops until tomorrow.
 
 Party: 2 adults + 1 child aged 10, 1 room, prices in GBP for the whole stay.
 
@@ -291,18 +293,32 @@ def utc_now():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def run(hotels, out_path, diagnose=False):
-    """Check the hotels, merge with today's file at out_path (if any) and return the document."""
+def run(hotels, out_path, diagnose=False, retry_robot_check=False, state=None, evening=False):
+    """Check the hotels, merge with today's file at out_path (if any) and return the document.
+    retry_robot_check: re-ask about options left as "robot check" earlier today (the daily
+    workflow's single second attempt). evening: the daily workflow's evening attempt, which does
+    nothing if today's file already has no robot check or error, otherwise re-asks the unpriced
+    options (or does a full run if there is no file for today). state, if given, gets
+    state["blocked"] = True when this run itself was challenged."""
     on_github = os.environ.get("GITHUB_ACTIONS") == "true"
     runner, where = ("github-actions", "GitHub") if on_github else ("mac", "Mac")
     today = datetime.now(LONDON).date().isoformat()
+    state = state if state is not None else {}
+    state["blocked"] = False
 
     previous = {}
     if out_path and os.path.exists(out_path):
         prev = json.load(open(out_path))
         if prev.get("date") == today:  # never carry yesterday's prices into a file dated today
             previous = {r["option_id"]: r for r in prev.get("results", [])}
-    if any(r.get("status") == "robot check" for r in previous.values()):
+    if evening:
+        failed = [r for r in previous.values()
+                  if r.get("status") == "robot check" or str(r.get("status", "")).startswith("error")]
+        if previous and not failed:
+            print("Today's check already succeeded; evening attempt not needed.")
+            return None
+        retry_robot_check = True
+    if any(r.get("status") == "robot check" for r in previous.values()) and not retry_robot_check:
         print("Booking.com showed a robot check earlier today; not asking again until tomorrow.")
         return None
 
@@ -332,6 +348,7 @@ def run(hotels, out_path, diagnose=False):
         print(f"  -> {r['status']}  price_gbp={r['price_gbp']}  price_any_gbp={r['price_any_gbp']}  "
               f"room={r['room']!r}  taxes_included={r['taxes_included']}  fc_until={r['free_cancellation_until']}")
 
+    state["blocked"] = blocked
     json.dump(ids, open(IDS_FILE, "w"), indent=1, sort_keys=True)
     priced = sum(1 for r in results if r["status"] in PRICED)
     print(f"{priced} of {len(results)} priced; {client.calls} requests; runner={runner}")
@@ -344,13 +361,21 @@ def main(argv=None):
     ap.add_argument("--diagnose", action="store_true")
     ap.add_argument("--write", action="store_true", help=f"write {LATEST} (all 21 options)")
     ap.add_argument("--out", help="write results to this file instead")
+    ap.add_argument("--retry-robot-check", action="store_true",
+                    help="re-ask about options left as 'robot check' earlier today (one second attempt)")
+    ap.add_argument("--evening", action="store_true",
+                    help="evening attempt: only acts if today's file is missing or has a robot check or error")
     a = ap.parse_args(argv)
     if a.write and a.hotels:
         ap.error(f"--write produces {LATEST}, which must hold all 21 options; use --out for a subset")
 
     hotels = TEST_HOTELS[: a.hotels] if a.hotels else HOTELS
     out_path = a.out or (LATEST if a.write else None)
-    doc = run(hotels, out_path, a.diagnose)
+    state = {}
+    doc = run(hotels, out_path, a.diagnose, a.retry_robot_check, state, a.evening)
+    if os.environ.get("GITHUB_OUTPUT"):  # tells the workflow whether this run was challenged
+        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+            f.write(f"blocked={'true' if state.get('blocked') else 'false'}\n")
     if doc is not None and out_path:
         os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
         with open(out_path, "w") as f:

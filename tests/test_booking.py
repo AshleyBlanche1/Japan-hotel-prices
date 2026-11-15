@@ -176,12 +176,36 @@ def test_same_day_rerun():
             dict(bc.row(date, h[0], "earlier", dict(bc.EMPTY, price_gbp=1.0, price_any_gbp=1.0, status="ok"), "GitHub"),
                  status=status_for(i)) for i, h in enumerate(bc.HOTELS)]}
 
-    def go_with(prev):
+    def go_with(prev, **kw):
         def go(d):
             p = os.path.join(d, "latest.json")
             json.dump(prev, open(p, "w"))
-            return bc.run(bc.HOTELS, p)
+            return bc.run(bc.HOTELS, p, **kw)
         return go
+
+    # The single second attempt: only the "robot check" options (here 3..20) are asked again
+    state = {}
+    robot_from_3 = prev_doc(today, lambda i: "robot check" if i > 2 else "ok")
+    doc, asked = with_fake_check({}, go_with(robot_from_3, retry_robot_check=True, state=state))
+    assert asked == [h[1] for h in bc.HOTELS[3:]] and state["blocked"] is False
+    assert [r["status"] for r in doc["results"]] == ["ok"] * 21 and doc["results"][0]["checked_at"] == "earlier"
+    # ...and if the second attempt is challenged too, state says so (the workflow then stops)
+    state = {}
+    doc, asked = with_fake_check({"jw-marriott-tokyo": bc.RobotCheck("HTTP 202")},
+                                 go_with(prev_doc(today, lambda i: "robot check"), retry_robot_check=True, state=state))
+    assert state["blocked"] is True and len(asked) == 2 and doc["results"][1]["status"] == "robot check"
+
+    # Evening attempt: nothing to do if today's file is clean (sold out is not a failure)
+    clean = prev_doc(today, lambda i: "sold out" if i == 0 else "ok")
+    doc, asked = with_fake_check({}, go_with(clean, evening=True))
+    assert doc is None and asked == []
+    # ...re-asks only robot-check / error options if today's file has them
+    doc, asked = with_fake_check({}, go_with(prev_doc(today, lambda i: "robot check" if i >= 19 else
+                                                      ("error: HTTP 500" if i == 4 else "ok")), evening=True))
+    assert asked == [bc.HOTELS[4][1], bc.HOTELS[19][1], bc.HOTELS[20][1]] and len(doc["results"]) == 21
+    # ...and does a full run if there is no file for today
+    doc, asked = with_fake_check({}, go_with(prev_doc("2000-01-01", lambda i: "ok"), evening=True))
+    assert len(asked) == 21 and doc["date"] == today
 
     # Same day: keep priced options, only ask about the unpriced ones
     doc, asked = with_fake_check({}, go_with(prev_doc(today, lambda i: "ok" if i != 5 else "error: HTTP 500")))
