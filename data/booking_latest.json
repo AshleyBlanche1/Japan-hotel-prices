@@ -1,13 +1,13 @@
 {
  "date": "2026-11-17",
- "checked_at": "2026-11-17T00:59:48Z",
+ "checked_at": "2026-11-17T14:43:14Z",
  "runner": "github-actions",
  "results": [
   {
    "date": "2026-11-17",
    "option_id": "tokyo-1-1-hotel-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-17T00:56:09Z",
+   "checked_at": "2026-11-17T14:43:14Z",
    "price_gbp": null,
    "price_any_gbp": null,
    "genius_gbp": null,
