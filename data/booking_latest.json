@@ -1,13 +1,13 @@
 {
  "date": "2026-11-18",
- "checked_at": "2026-11-18T14:26:15Z",
+ "checked_at": "2026-11-18T23:29:36Z",
  "runner": "github-actions",
  "results": [
   {
    "date": "2026-11-18",
    "option_id": "tokyo-1-1-hotel-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-18T14:22:38Z",
+   "checked_at": "2026-11-18T23:29:28Z",
    "price_gbp": null,
    "price_any_gbp": null,
    "genius_gbp": null,
@@ -194,7 +194,7 @@
    "date": "2026-11-18",
    "option_id": "kyoto-dusit-thani-kyoto",
    "site": "Booking.com",
-   "checked_at": "2026-11-18T14:24:37Z",
+   "checked_at": "2026-11-18T23:29:36Z",
    "price_gbp": null,
    "price_any_gbp": null,
    "genius_gbp": null,
