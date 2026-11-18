@@ -1,262 +1,174 @@
 {
- "date": "2026-11-17",
- "checked_at": "2026-11-17T14:19:45Z",
+ "date": "2026-11-18",
+ "checked_at": "2026-11-18T13:54:40Z",
  "results": [
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-1-hotel-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
+   "checked_at": "2026-11-18T13:54:40Z",
    "price_gbp": null,
    "cheapest_site": null,
    "cheapest_stay_gbp": null,
    "price_basis": null,
    "offers_seen": 0,
    "status": "no offers found",
-   "seconds": 9.3
+   "seconds": 26.2
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-jw-marriott-hotel-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
+   "checked_at": "2026-11-18T13:54:40Z",
    "price_gbp": null,
    "cheapest_site": null,
    "cheapest_stay_gbp": null,
    "price_basis": null,
    "offers_seen": 0,
    "status": "no offers found",
-   "seconds": 20.0
+   "seconds": 23.5
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-hotel-toranomon-hills",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
+   "checked_at": "2026-11-18T13:54:40Z",
    "price_gbp": null,
    "cheapest_site": null,
    "cheapest_stay_gbp": null,
    "price_basis": null,
    "offers_seen": 0,
    "status": "no offers found",
-   "seconds": 26.4
+   "seconds": 11.0
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-the-prince-sakura-tower-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 22.6
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "error: ReadTimeout: HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=45)",
+   "seconds": 45.1
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-ana-intercontinental-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 17.4
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "error: ReadTimeout: HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=45)",
+   "seconds": 45.1
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-the-prince-park-tower-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
+   "checked_at": "2026-11-18T13:54:40Z",
    "status": "error: ReadTimeout: HTTPSConnectionPool(host='api.brightdata.com', port=443): Read timed out. (read timeout=45)",
-   "seconds": 45.0
+   "seconds": 45.1
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-1-grand-prince-hotel-shin-takanawa",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 17.1
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "osaka-the-osaka-station-hotel",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 16.9
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "osaka-the-gate-hotel-osaka-by-hulic",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "status": "waiting for Google hotel id (run the SerpApi check once by hand)"
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "osaka-rihga-royal-hotel-osaka",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 12.4
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "osaka-the-royal-park-hotel-iconic-osaka-midosuji",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 3.0
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "kyoto-dusit-thani-kyoto",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "status": "waiting for Google hotel id (run the SerpApi check once by hand)"
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "kyoto-hotel-the-celestine-kyoto-gion",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 20.2
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "kyoto-the-thousand-kyoto",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 13.0
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "kyoto-hilton-kyoto",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 21.2
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-jw-marriott-hotel-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 20.2
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-gajoen-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 22.1
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-the-prince-sakura-tower-tokyo",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 21.3
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-grand-prince-hotel-takanawa",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 18.9
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-intercontinental-tokyo-bay",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 29.7
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   },
   {
-   "date": "2026-11-17",
+   "date": "2026-11-18",
    "option_id": "tokyo-2-grand-prince-hotel-shin-takanawa",
    "site": "Booking.com via Google Hotels (Bright Data)",
-   "checked_at": "2026-11-17T14:19:45Z",
-   "price_gbp": null,
-   "cheapest_site": null,
-   "cheapest_stay_gbp": null,
-   "price_basis": null,
-   "offers_seen": 0,
-   "status": "no offers found",
-   "seconds": 15.4
+   "checked_at": "2026-11-18T13:54:40Z",
+   "status": "skipped: Bright Data failed 3 times in a row this run"
   }
  ]
 }
