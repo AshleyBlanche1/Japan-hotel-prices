@@ -1,15 +1,15 @@
 {
- "date": "2026-11-22",
- "checked_at": "2026-11-22T22:38:44Z",
+ "date": "2026-11-23",
+ "checked_at": "2026-11-23T16:19:06Z",
  "runner": "github-actions",
  "results": [
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-1-hotel-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:29:00Z",
-   "price_gbp": 3049.28,
-   "price_any_gbp": 2134.5,
+   "checked_at": "2026-11-23T16:15:37Z",
+   "price_gbp": 2000.83,
+   "price_any_gbp": 2000.83,
    "genius_gbp": null,
    "before_discount_gbp": null,
    "price_jpy": null,
@@ -21,10 +21,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-jw-marriott-hotel-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:29:10Z",
+   "checked_at": "2026-11-23T16:15:43Z",
    "price_gbp": 1670.57,
    "price_any_gbp": 1670.57,
    "genius_gbp": null,
@@ -38,10 +38,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-hotel-toranomon-hills",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:29:25Z",
+   "checked_at": "2026-11-23T16:15:56Z",
    "price_gbp": 1663.71,
    "price_any_gbp": 1394.84,
    "genius_gbp": null,
@@ -55,10 +55,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-the-prince-sakura-tower-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:29:33Z",
+   "checked_at": "2026-11-23T16:16:03Z",
    "price_gbp": 2141.15,
    "price_any_gbp": 2141.15,
    "genius_gbp": null,
@@ -72,12 +72,12 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-ana-intercontinental-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:29:50Z",
-   "price_gbp": 1164.68,
-   "price_any_gbp": 1130.09,
+   "checked_at": "2026-11-23T16:16:21Z",
+   "price_gbp": 1159.88,
+   "price_any_gbp": 1125.43,
    "genius_gbp": null,
    "before_discount_gbp": null,
    "price_jpy": null,
@@ -89,10 +89,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-the-prince-park-tower-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:01Z",
+   "checked_at": "2026-11-23T16:16:28Z",
    "price_gbp": 1264.69,
    "price_any_gbp": 1264.69,
    "genius_gbp": null,
@@ -106,10 +106,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-1-grand-prince-hotel-shin-takanawa",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:10Z",
+   "checked_at": "2026-11-23T16:16:37Z",
    "price_gbp": 914.91,
    "price_any_gbp": 914.91,
    "genius_gbp": null,
@@ -123,10 +123,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "osaka-the-osaka-station-hotel",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:20Z",
+   "checked_at": "2026-11-23T16:16:48Z",
    "price_gbp": 1416.62,
    "price_any_gbp": 1416.62,
    "genius_gbp": null,
@@ -140,10 +140,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "osaka-the-gate-hotel-osaka-by-hulic",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:27Z",
+   "checked_at": "2026-11-23T16:16:58Z",
    "price_gbp": 1529.29,
    "price_any_gbp": 1529.29,
    "genius_gbp": null,
@@ -157,12 +157,12 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "osaka-rihga-royal-hotel-osaka",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:42Z",
-   "price_gbp": 731.41,
-   "price_any_gbp": 709.47,
+   "checked_at": "2026-11-23T16:17:15Z",
+   "price_gbp": 733.58,
+   "price_any_gbp": 711.57,
    "genius_gbp": null,
    "before_discount_gbp": null,
    "price_jpy": null,
@@ -174,10 +174,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "osaka-the-royal-park-hotel-iconic-osaka-midosuji",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:30:52Z",
+   "checked_at": "2026-11-23T16:17:23Z",
    "price_gbp": 689.43,
    "price_any_gbp": 689.43,
    "genius_gbp": null,
@@ -191,10 +191,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "kyoto-dusit-thani-kyoto",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T22:38:44Z",
+   "checked_at": "2026-11-23T16:17:34Z",
    "price_gbp": null,
    "price_any_gbp": null,
    "genius_gbp": null,
@@ -208,10 +208,10 @@
    "status": "error: hotel not in search results"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "kyoto-hotel-the-celestine-kyoto-gion",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:31:07Z",
+   "checked_at": "2026-11-23T16:17:41Z",
    "price_gbp": 501.17,
    "price_any_gbp": 501.17,
    "genius_gbp": null,
@@ -225,10 +225,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "kyoto-the-thousand-kyoto",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:31:16Z",
+   "checked_at": "2026-11-23T16:17:51Z",
    "price_gbp": 445.34,
    "price_any_gbp": 445.34,
    "genius_gbp": null,
@@ -242,10 +242,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "kyoto-hilton-kyoto",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:31:30Z",
+   "checked_at": "2026-11-23T16:18:09Z",
    "price_gbp": 518.99,
    "price_any_gbp": 430.77,
    "genius_gbp": null,
@@ -259,10 +259,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-jw-marriott-hotel-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:31:38Z",
+   "checked_at": "2026-11-23T16:18:16Z",
    "price_gbp": 862.93,
    "price_any_gbp": 862.93,
    "genius_gbp": null,
@@ -276,12 +276,12 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-gajoen-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:31:53Z",
-   "price_gbp": 1335.41,
-   "price_any_gbp": 1142.77,
+   "checked_at": "2026-11-23T16:18:33Z",
+   "price_gbp": 1352.28,
+   "price_any_gbp": 1157.21,
    "genius_gbp": null,
    "before_discount_gbp": null,
    "price_jpy": null,
@@ -293,10 +293,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-the-prince-sakura-tower-tokyo",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:32:01Z",
+   "checked_at": "2026-11-23T16:18:41Z",
    "price_gbp": 1070.58,
    "price_any_gbp": 1070.58,
    "genius_gbp": null,
@@ -310,10 +310,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-grand-prince-hotel-takanawa",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:32:09Z",
+   "checked_at": "2026-11-23T16:18:51Z",
    "price_gbp": 622.21,
    "price_any_gbp": 622.21,
    "genius_gbp": null,
@@ -327,10 +327,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-intercontinental-tokyo-bay",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:32:17Z",
+   "checked_at": "2026-11-23T16:18:59Z",
    "price_gbp": 590.52,
    "price_any_gbp": 590.52,
    "genius_gbp": null,
@@ -344,10 +344,10 @@
    "status": "ok"
   },
   {
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "option_id": "tokyo-2-grand-prince-hotel-shin-takanawa",
    "site": "Booking.com",
-   "checked_at": "2026-11-22T13:32:25Z",
+   "checked_at": "2026-11-23T16:19:06Z",
    "price_gbp": 468.6,
    "price_any_gbp": 468.6,
    "genius_gbp": null,
