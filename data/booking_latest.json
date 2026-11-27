@@ -1,6 +1,6 @@
 {
  "date": "2026-11-27",
- "checked_at": "2026-11-27T01:09:15Z",
+ "checked_at": "2026-11-27T15:23:45Z",
  "runner": "github-actions",
  "results": [
   {
@@ -194,7 +194,7 @@
    "date": "2026-11-27",
    "option_id": "kyoto-dusit-thani-kyoto",
    "site": "Booking.com",
-   "checked_at": "2026-11-27T01:07:49Z",
+   "checked_at": "2026-11-27T15:23:45Z",
    "price_gbp": null,
    "price_any_gbp": null,
    "genius_gbp": null,
